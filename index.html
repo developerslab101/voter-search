@@ -7,19 +7,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink:#0f1923; --paper:#f5f0e8; --card:#ffffff;
-    --accent:#c94b1a; --accent2:#1a6bc9;
-    --muted:#7a8a99; --border:#d8d0c4;
-    --male-bg:#e8f0fb; --male-txt:#1a4a8c;
-    --female-bg:#fce8f0; --female-txt:#8c1a4a;
+  :root{
+    --ink:#0f1923;--paper:#f5f0e8;--card:#ffffff;
+    --accent:#c94b1a;--accent2:#1a6bc9;
+    --muted:#7a8a99;--border:#d8d0c4;
+    --male-bg:#e8f0fb;--male-txt:#1a4a8c;
+    --female-bg:#fce8f0;--female-txt:#8c1a4a;
     --shadow:0 2px 12px rgba(15,25,35,.08);
     --shadow-lg:0 8px 32px rgba(15,25,35,.14);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
 
-  /* HEADER */
   header{background:var(--ink);position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
   .header-inner{max-width:1280px;margin:0 auto;padding:15px 24px 12px;display:flex;align-items:center;gap:18px}
   .header-badge{background:var(--accent);color:#fff;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;padding:4px 10px;border-radius:3px;letter-spacing:.08em;white-space:nowrap;flex-shrink:0}
@@ -30,45 +29,38 @@
   .stat-item{text-align:right}
   .stat-num{font-size:21px;font-weight:700;color:var(--accent);font-family:'DM Mono',monospace;line-height:1}
   .stat-lbl{font-size:9.5px;color:#8a9aaa;letter-spacing:.06em;text-transform:uppercase}
+  .status-pill{padding:6px 10px;border-radius:16px;font-size:11px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;border:1.5px solid transparent}
+  .status-loading{background:#fff2cf;color:#8a5b00;border-color:#f0d48a}
+  .status-ok{background:#e8f7ee;color:#1f6d3a;border-color:#bfe7cc}
+  .status-error{background:#fde8e6;color:#8c2d20;border-color:#f3b5ae}
+  .btn-add{padding:8px 12px;border-radius:8px;border:1.5px solid var(--accent);background:var(--accent);color:#fff;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .15s}
+  .btn-add:hover{filter:brightness(1.05)}
+  .btn-mini{padding:7px 10px;border-radius:8px;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+  .btn-mini:hover{border-color:var(--accent2);color:var(--accent2)}
+  .btn-mini.danger{border-color:#f3b5ae;color:#8c2d20}
+  .btn-mini.danger:hover{border-color:#e28b82;color:#7a1f16}
+  .btn-edit{padding:6px 10px;border-radius:7px;border:1.5px solid var(--accent2);background:transparent;color:var(--accent2);font-size:11.5px;font-weight:600;cursor:pointer;transition:all .15s}
+  .btn-edit:hover{background:var(--accent2);color:#fff}
+  .btn-edit[disabled]{opacity:.4;cursor:not-allowed}
 
-  /* LOAD BANNER */
-  .load-banner{background:var(--accent2);color:#fff;text-align:center;padding:7px;font-size:13px;display:none}
-  .load-banner.visible{display:block}
-
-  /* CONTROLS */
   .controls-wrap{background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:64px;z-index:90;box-shadow:0 2px 8px rgba(15,25,35,.06)}
   .controls{max-width:1280px;margin:0 auto;padding:11px 24px;display:grid;grid-template-columns:1fr 190px 130px 130px 120px auto;gap:10px;align-items:center}
 
   .input-group{position:relative}
   .input-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;pointer-events:none;line-height:1;font-family:'DM Mono',monospace;font-weight:500}
 
-  input[type="search"],input[type="number"]{
-    width:100%;padding:9px 10px 9px 32px;
-    border:1.5px solid var(--border);border-radius:8px;
-    font-size:13px;font-family:'Outfit',sans-serif;
-    background:var(--paper);color:var(--ink);outline:none;
-    transition:border-color .2s,background .2s;
-    -moz-appearance:textfield}
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none}
+  input[type="search"],input[type="number"]{width:100%;padding:9px 10px 9px 32px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);outline:none;transition:border-color .2s,background .2s;-moz-appearance:textfield}
+  input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none}
   input:focus{border-color:var(--accent2);background:#fff}
   input::placeholder{color:var(--muted);font-size:12px}
   input[type="search"]::placeholder{font-family:'Tiro Bangla',serif}
 
-  select{
-    width:100%;padding:9px 28px 9px 10px;
-    border:1.5px solid var(--border);border-radius:8px;
-    font-size:13px;font-family:'Outfit',sans-serif;
-    background:var(--paper);color:var(--ink);outline:none;cursor:pointer;appearance:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a8a99' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 10px center;
-    transition:border-color .2s}
+  select{width:100%;padding:9px 28px 9px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a8a99' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .2s}
   select:focus{border-color:var(--accent2);background-color:#fff}
 
   .btn-reset{padding:9px 14px;background:transparent;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
   .btn-reset:hover{border-color:var(--accent);color:var(--accent)}
 
-  /* INFO BAR */
   .info-bar{max-width:1280px;margin:0 auto;padding:8px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}
   .result-count{font-size:13px;color:var(--muted)}
   .result-count strong{color:var(--ink);font-weight:600}
@@ -78,7 +70,6 @@
   .part-tab.active-238{background:var(--accent);border-color:var(--accent);color:#fff}
   .part-tab.active-240{background:var(--accent2);border-color:var(--accent2);color:#fff}
 
-  /* TABLE */
   .table-wrap{max-width:1280px;margin:0 auto;padding:0 24px 32px;overflow-x:auto}
   table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
   thead{background:var(--ink);color:var(--paper)}
@@ -102,41 +93,54 @@
   .td-house{font-family:'DM Mono',monospace;font-size:11.5px;color:#555;min-width:72px}
   .td-age{text-align:center;font-weight:600;width:48px;font-family:'DM Mono',monospace}
   .td-gender{width:78px;text-align:center}
+  .td-log{font-family:'DM Mono',monospace;font-size:10.5px;color:#56606b;min-width:130px}
   .gender-pill{display:inline-block;padding:2px 9px;border-radius:12px;font-size:11px;font-weight:600;font-family:'Tiro Bangla',serif}
   .gender-m{background:var(--male-bg);color:var(--male-txt)}
   .gender-f{background:var(--female-bg);color:var(--female-txt)}
   mark{background:#ffe066;color:inherit;border-radius:2px;padding:0 1px}
 
-  /* EMPTY */
   .empty-state{text-align:center;padding:56px 24px;color:var(--muted)}
   .empty-icon{font-size:44px;margin-bottom:12px;opacity:.4}
   .empty-title{font-size:17px;font-weight:600;margin-bottom:6px}
   .empty-sub{font-size:13px;font-family:'Tiro Bangla',serif}
 
-  /* PAGINATION */
-  .pagination{max-width:1280px;margin:0 auto;padding:12px 24px 0;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
-  .page-btn{min-width:34px;height:34px;padding:0 10px;border:1.5px solid var(--border);background:var(--card);border-radius:7px;font-size:12.5px;font-family:'DM Mono',monospace;cursor:pointer;color:var(--ink);transition:all .12s}
-  .page-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
-  .page-btn.active{background:var(--ink);border-color:var(--ink);color:#fff}
-  .page-btn:disabled{opacity:.3;cursor:not-allowed}
+.pagination{max-width:1280px;margin:0 auto;padding:12px 24px 0;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+.page-btn{min-width:34px;height:34px;padding:0 10px;border:1.5px solid var(--border);background:var(--card);border-radius:7px;font-size:12.5px;font-family:'DM Mono',monospace;cursor:pointer;color:var(--ink);transition:all .12s}
+.page-btn:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.page-btn.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.page-btn:disabled{opacity:.3;cursor:not-allowed}
 
-  /* FOOTER */
+.status-bar{max-width:1280px;margin:8px auto 0;padding:10px 16px;background:var(--ink);color:var(--paper);border-radius:12px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.status-bar .stat-item{text-align:left}
+.status-bar .stat-num{font-size:16px;color:var(--accent);font-weight:700}
+.status-bar .stat-lbl{font-size:9px;color:#8a9aaa}
+.status-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.status-pill{padding:6px 10px;border-radius:16px;font-size:11px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;border:1.5px solid transparent}
+.status-loading{background:#fff2cf;color:#8a5b00;border-color:#f0d48a}
+.status-ok{background:#e8f7ee;color:#1f6d3a;border-color:#bfe7cc}
+.status-error{background:#fde8e6;color:#8c2d20;border-color:#f3b5ae}
+
   footer{max-width:1280px;margin:8px auto 0;padding:18px 24px 36px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);gap:12px;flex-wrap:wrap}
   .footer-bn{font-family:'Tiro Bangla',serif;font-size:13px}
 
-  /* RESPONSIVE */
-  @media(max-width:960px){
-    .controls{grid-template-columns:1fr 1fr 1fr}
-    .btn-reset{display:none}
-    .header-stats{display:none}
-  }
-  @media(max-width:640px){
-    .controls{grid-template-columns:1fr 1fr}
-    .td-relation,.td-house{display:none}
-    .table-wrap{padding:0 12px 20px}
-    .info-bar{flex-direction:column;align-items:flex-start;gap:6px}
-    .header-inner{padding:10px 14px;gap:10px}
-  }
+  /* Modal */
+  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:200}
+  .modal.show{display:flex}
+  .modal-backdrop{position:absolute;inset:0;background:rgba(15,25,35,.5);backdrop-filter:blur(2px)}
+  .modal-card{position:relative;width:min(720px,92vw);background:var(--card);border-radius:16px;box-shadow:var(--shadow-lg);padding:18px 20px 20px}
+  .modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .modal-title{font-size:18px;font-weight:700}
+  .modal-sub{font-size:12.5px;color:var(--muted);margin-top:4px}
+  .modal-close{border:1.5px solid var(--border);background:transparent;border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
+  .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .modal-grid .full{grid-column:1 / -1}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+  .btn-primary{padding:9px 14px;border-radius:8px;border:1.5px solid var(--accent2);background:var(--accent2);color:#fff;font-size:12.5px;font-weight:600;cursor:pointer}
+  .btn-ghost{padding:9px 14px;border-radius:8px;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-size:12.5px;cursor:pointer}
+  .form-error{color:#8c2d20;background:#fde8e6;border:1.5px solid #f3b5ae;border-radius:8px;padding:8px 10px;font-size:12px;margin-top:10px;display:none}
+
+  @media(max-width:960px){.controls{grid-template-columns:1fr 1fr 1fr}.btn-reset{display:none}.header-stats{display:none}}
+  @media(max-width:640px){.controls{grid-template-columns:1fr 1fr}.td-relation,.td-house{display:none}.table-wrap{padding:0 12px 20px}.info-bar{flex-direction:column;align-items:flex-start;gap:6px}.header-inner{padding:10px 14px;gap:10px}}
   @media(max-width:420px){.controls{grid-template-columns:1fr}}
 </style>
 </head>
@@ -154,45 +158,30 @@
         <div class="stat-num" id="stat-total">—</div>
         <div class="stat-lbl">Total</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num" id="stat-238">—</div>
-        <div class="stat-lbl">Part 238</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" id="stat-240">—</div>
-        <div class="stat-lbl">Part 240</div>
-      </div>
+      <div id="header-stats-wrap" style="display:flex;gap:24px"></div>
     </div>
+    <!-- Status moved below table -->
+    <!-- <button class="btn-mini" onclick="importJson()">Import JSON</button> -->
+    <!-- <button class="btn-add" onclick="openAddModal()">➕ Add Voter</button> -->
   </div>
 </header>
 
-<div class="load-banner" id="load-banner">⏳ ডেটা লোড হচ্ছে… / Loading voter data from both parts…</div>
-
 <div class="controls-wrap">
   <div class="controls">
-    <!-- Text search -->
     <div class="input-group">
       <span class="input-icon">🔍</span>
       <input type="search" id="q" placeholder="নাম, ভোটার আইডি বা বাড়ির নং… (Name / Voter ID / House)" autocomplete="off"/>
     </div>
-    <!-- Part -->
-    <select id="filter-part">
-      <option value="">সব অংশ / All Parts</option>
-      <option value="238">Part 238 — Block B</option>
-      <option value="240">Part 240 — Block C</option>
-    </select>
-    <!-- Serial number -->
+    <select id="filter-part"><option value="">সব অংশ / All Parts</option></select>
     <div class="input-group">
       <span class="input-icon">#</span>
       <input type="number" id="filter-serial" placeholder="Serial No." min="1"/>
     </div>
-    <!-- Gender -->
     <select id="filter-gender">
       <option value="">সব লিঙ্গ / All</option>
       <option value="পুরুষ">পুরুষ / Male</option>
       <option value="মহিলা">মহিলা / Female</option>
     </select>
-    <!-- Age range -->
     <select id="filter-age">
       <option value="">সব বয়স</option>
       <option value="18-30">18–30</option>
@@ -207,22 +196,143 @@
 
 <div class="info-bar">
   <div class="result-count" id="result-count">Loading…</div>
-  <div class="part-tabs">
-    <button class="part-tab active-all" id="tab-all" onclick="setPartTab('')">All</button>
-    <button class="part-tab" id="tab-238" onclick="setPartTab('238')">238</button>
-    <button class="part-tab" id="tab-240" onclick="setPartTab('240')">240</button>
-  </div>
+  <div class="part-tabs" id="part-tabs-wrap"></div>
+</div>
+<div class="info-bar" style="padding-top:0">
+  <div class="result-count" id="status-msg" style="display:none"></div>
 </div>
 
-<div class="table-wrap" id="table-wrap">
-  <div class="empty-state">
-    <div class="empty-icon">📋</div>
-    <div class="empty-title">ডেটা লোড হচ্ছে…</div>
-    <div class="empty-sub">Loading voter records — please wait</div>
-  </div>
-</div>
-
+<div class="table-wrap" id="table-wrap"></div>
 <div class="pagination" id="pagination"></div>
+
+<div class="status-bar">
+  <div class="status-pill status-loading" id="sb-status">Loading</div>
+  <div class="stat-item">
+    <div class="stat-num" id="sync-time">—</div>
+    <div class="stat-lbl">Last Sync</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num" id="login-status">Guest</div>
+    <div class="stat-lbl">User</div>
+  </div>
+  <div class="status-actions">
+    <button class="btn-mini" onclick="reloadData()">Reload</button>
+    <button class="btn-mini" onclick="login()">Login</button>
+    <button class="btn-mini danger" onclick="logout()" id="logout-btn" style="display:none">Logout</button>
+  </div>
+</div>
+
+<!--
+<div class="modal" id="add-modal" aria-hidden="true">
+  <div class="modal-backdrop" onclick="closeAddModal()"></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="add-modal-title">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="add-modal-title">Add Voter</div>
+        <div class="modal-sub">নতুন ভোটার যুক্ত করুন · Supabase insert</div>
+      </div>
+      <button class="modal-close" onclick="closeAddModal()">Close</button>
+    </div>
+    <form id="add-form">
+      <div class="modal-grid">
+        <div class="input-group full">
+          <span class="input-icon">👤</span>
+          <input type="text" id="add-name" placeholder="নাম / Name" required>
+        </div>
+        <div class="input-group full">
+          <span class="input-icon">🆔</span>
+          <input type="text" id="add-voter-id" placeholder="Voter ID" required>
+        </div>
+        <div class="input-group full">
+          <span class="input-icon">👪</span>
+          <input type="text" id="add-relation" placeholder="পিতা / স্বামী (Relation)">
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🏠</span>
+          <input type="text" id="add-house" placeholder="House No.">
+        </div>
+        <div class="input-group">
+          <span class="input-icon">#</span>
+          <input type="number" id="add-serial" placeholder="Serial No." min="1" required>
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🎂</span>
+          <input type="number" id="add-age" placeholder="Age" min="18" required>
+        </div>
+        <select id="add-gender" required>
+          <option value="">লিঙ্গ / Gender</option>
+          <option value="পুরুষ">পুরুষ / Male</option>
+          <option value="মহিলা">মহিলা / Female</option>
+        </select>
+        <select id="add-part" required>
+          <option value="">Part</option>
+        </select>
+      </div>
+      <div class="form-error" id="add-error"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-ghost" onclick="closeAddModal()">Cancel</button>
+        <button type="submit" class="btn-primary" id="add-submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+-->
+
+<!--
+<div class="modal" id="edit-modal" aria-hidden="true">
+  <div class="modal-backdrop" onclick="closeEditModal()"></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="edit-modal-title">Edit Voter</div>
+        <div class="modal-sub">Update record · Supabase update</div>
+      </div>
+      <button class="modal-close" onclick="closeEditModal()">Close</button>
+    </div>
+    <form id="edit-form">
+      <div class="modal-grid">
+        <div class="input-group full">
+          <span class="input-icon">🆔</span>
+          <input type="text" id="edit-voter-id" placeholder="Voter ID" disabled>
+        </div>
+        <div class="input-group full">
+          <span class="input-icon">👤</span>
+          <input type="text" id="edit-name" placeholder="নাম / Name" required>
+        </div>
+        <div class="input-group full">
+          <span class="input-icon">👪</span>
+          <input type="text" id="edit-relation" placeholder="পিতা / স্বামী (Relation)">
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🏠</span>
+          <input type="text" id="edit-house" placeholder="House No.">
+        </div>
+        <div class="input-group">
+          <span class="input-icon">#</span>
+          <input type="number" id="edit-serial" placeholder="Serial No." min="1" required>
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🎂</span>
+          <input type="number" id="edit-age" placeholder="Age" min="18" required>
+        </div>
+        <select id="edit-gender" required>
+          <option value="">লিঙ্গ / Gender</option>
+          <option value="পুরুষ">পুরুষ / Male</option>
+          <option value="মহিলা">মহিলা / Female</option>
+        </select>
+        <select id="edit-part" required>
+          <option value="">Part</option>
+        </select>
+      </div>
+      <div class="form-error" id="edit-error"></div>
+      <div class="modal-actions">
+        <button type="button" class="btn-ghost" onclick="closeEditModal()">Cancel</button>
+        <button type="submit" class="btn-primary" id="edit-submit">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+-->
 
 <footer>
   <div>
@@ -235,62 +345,306 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-// ── CONFIG ────────────────────────────────────────────────────────────────────
-const PARTS = [
-  { file: 'data_238.json', part: '238' },
-  { file: 'data_240.json', part: '240' },
-];
-const PAGE_SIZE = 50;
+// ════════════════════════════════════════════════════════════════════════════
+// SUPABASE CONFIG — replace with your project values
+// ════════════════════════════════════════════════════════════════════════════
+const SUPABASE_URL = 'https://iblnrivzulqqxpokvqev.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlibG5yaXZ6dWxxcXhwb2t2cWV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5ODY1ODksImV4cCI6MjA4OTU2MjU4OX0.uBtHJ4tsCerRKA-YvDCgJ0ig-__8q8rmt5QklhxsiG0';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ── STATE ─────────────────────────────────────────────────────────────────────
-let allData   = [];
-let filtered  = [];
+// ── DATA REGISTRY (built from Supabase) ─────────────────────────────────────
+let PARTS_REGISTRY = [];
+
+// ── STATE ───────────────────────────────────────────────────────────────────
+let allData     = [];
+let filtered    = [];
 let currentPage = 1;
+const PAGE_SIZE = 50;
+let editingId   = null;
+let editLog     = {};
 
-// ── LOAD DATA ─────────────────────────────────────────────────────────────────
-async function init() {
-  document.getElementById('load-banner').classList.add('visible');
+// ── INIT ────────────────────────────────────────────────────────────────────
+const ALLOWED_MOBILES = [
+  // Add allowed mobiles here, e.g. "9876543210"
+  "8017730776",
+  "9903436969"
+];
 
-  const results = await Promise.allSettled(
-    PARTS.map(p => fetch(p.file).then(r => { if (!r.ok) throw new Error(); return r.json(); }))
-  );
-
-  results.forEach((res, i) => {
-    if (res.status === 'fulfilled') {
-      // ensure part field is correct
-      res.value.forEach(r => { r.part = PARTS[i].part; });
-      allData.push(...res.value);
-    } else {
-      console.warn(`Could not load ${PARTS[i].file}`);
-    }
-  });
-
-  document.getElementById('load-banner').classList.remove('visible');
-
-  const c238 = allData.filter(r => r.part === '238').length;
-  const c240 = allData.filter(r => r.part === '240').length;
-  document.getElementById('stat-total').textContent = allData.length.toLocaleString();
-  document.getElementById('stat-238').textContent   = c238.toLocaleString();
-  document.getElementById('stat-240').textContent   = c240.toLocaleString();
-
+function init() {
+  loadFromCache();
+  buildUiFromRegistry();
   setupListeners();
+  loadEditLog();
+  initAuth();
   applyFilters();
 }
 
+function isSupabaseConfigured() {
+  return !SUPABASE_URL.includes('YOUR_PROJECT') && !SUPABASE_ANON_KEY.includes('YOUR_ANON_PUBLIC_KEY');
+}
+
+function setStatus(state, label) {
+  const el = document.getElementById('sb-status');
+  if (!el) return;
+  el.className = `status-pill status-${state}`;
+  el.textContent = label;
+}
+
+function buildRegistryFromData(data) {
+  const grouped = new Map();
+  data.forEach(r => {
+    const key = String(r.part);
+    if (!grouped.has(key)) grouped.set(key, []);
+    grouped.get(key).push(r);
+  });
+  PARTS_REGISTRY = Array.from(grouped.entries())
+    .sort((a, b) => (parseInt(a[0], 10) || 0) - (parseInt(b[0], 10) || 0))
+    .map(([key, rows]) => ({ key, label: `Part ${key}`, count: rows.length }));
+}
+
+function saveToCache(data) {
+  const ts = Date.now();
+  localStorage.setItem('voters_cache_v1', JSON.stringify({ ts, data }));
+  setLastSync(ts);
+}
+
+function loadFromCache() {
+  const raw = localStorage.getItem('voters_cache_v1');
+  if (!raw) {
+    setStatus('error', 'No Cache');
+    showStatusMsg('No cached data. Click Reload to fetch from Supabase.');
+    allData = [];
+    filtered = [];
+    PARTS_REGISTRY = [];
+    setLastSync(null);
+    return;
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    allData = Array.isArray(parsed.data) ? parsed.data : [];
+    buildRegistryFromData(allData);
+    setLastSync(parsed.ts || null);
+    setStatus('ok', 'Cached');
+    showStatusMsg('');
+  } catch (e) {
+    console.error('Cache parse error:', e);
+    setStatus('error', 'Cache Error');
+    showStatusMsg('Cache is corrupted. Click Reload to fetch from Supabase.');
+    allData = [];
+    filtered = [];
+    PARTS_REGISTRY = [];
+    setLastSync(null);
+  }
+}
+
+function setLastSync(ts) {
+  const el = document.getElementById('sync-time');
+  if (!el) return;
+  if (!ts) {
+    el.textContent = '—';
+    return;
+  }
+  const fmt = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Kolkata',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+  const parts = fmt.formatToParts(new Date(ts));
+  const get = t => parts.find(p => p.type === t)?.value || '';
+  const dd = get('day');
+  const mo = get('month');
+  const yy = get('year');
+  const hh = get('hour');
+  const mm = get('minute');
+  el.textContent = `${dd}-${mo}-${yy} ${hh}:${mm}`;
+}
+
+// ── EDIT LOG ────────────────────────────────────────────────────────────────
+function loadEditLog() {
+  try {
+    const raw = localStorage.getItem('voters_edit_log_v1');
+    editLog = raw ? JSON.parse(raw) : {};
+  } catch {
+    editLog = {};
+  }
+}
+
+function saveEditLog() {
+  localStorage.setItem('voters_edit_log_v1', JSON.stringify(editLog));
+}
+
+function setEditLog(id, byMobile) {
+  editLog[String(id)] = { by: byMobile, at: Date.now() };
+  saveEditLog();
+}
+
+function formatLogTime(ts) {
+  if (!ts) return '';
+  const fmt = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Kolkata',
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+  return fmt.format(new Date(ts));
+}
+
+async function fetchAllFromDb() {
+  if (!isSupabaseConfigured()) {
+    setStatus('error', 'Missing Config');
+    showEmptyState('Supabase configuration is missing', 'Please set SUPABASE_URL and SUPABASE_ANON_KEY.');
+    showStatusMsg('Supabase config missing. Update SUPABASE_URL and SUPABASE_ANON_KEY in index.html.');
+    return;
+  }
+
+  setStatus('loading', 'Loading');
+
+  const batchSize = 1000;
+  let from = 0;
+  let to = batchSize - 1;
+  const collected = [];
+
+  while (true) {
+    const { data, error } = await sb
+      .from('voters')
+      .select('serial,voter_id,name,relation,house,age,gender,part')
+      .order('part', { ascending: true })
+      .order('serial', { ascending: true })
+      .range(from, to);
+
+    if (error) {
+      console.error('Supabase load error:', error);
+      setStatus('error', 'Error');
+      showEmptyState('Failed to load data', 'Check Supabase table, RLS policy, and API keys.');
+      showStatusMsg(`Supabase error: ${error.message}`);
+      return;
+    }
+
+    const rows = data || [];
+    collected.push(...rows);
+    if (rows.length < batchSize) break;
+    from += batchSize;
+    to += batchSize;
+  }
+
+  allData = collected.map(r => ({ ...r, id: r.voter_id, part: String(r.part) }));
+  buildRegistryFromData(allData);
+  saveToCache(allData);
+  setStatus('ok', 'Live');
+  showStatusMsg('');
+}
+
+function buildUiFromRegistry() {
+  // Populate part dropdown dynamically from registry
+  const sel = document.getElementById('filter-part');
+  while (sel.options.length > 1) sel.remove(1);
+  PARTS_REGISTRY.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.key;
+    opt.textContent = p.label;
+    sel.appendChild(opt);
+  });
+
+  // Populate part tabs dynamically
+  const tabsWrap = document.getElementById('part-tabs-wrap');
+  tabsWrap.innerHTML = '<button class="part-tab active-all" id="tab-all" onclick="setPartTab(\'\')">All</button>';
+  PARTS_REGISTRY.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'part-tab';
+    btn.id = `tab-${p.key}`;
+    btn.textContent = p.key;
+    btn.onclick = () => setPartTab(p.key);
+    tabsWrap.appendChild(btn);
+  });
+
+  // Populate modal part select
+  const modalPart = document.getElementById('add-part');
+  if (modalPart) {
+    while (modalPart.options.length > 1) modalPart.remove(1);
+    PARTS_REGISTRY.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.key;
+      opt.textContent = p.label;
+      modalPart.appendChild(opt);
+    });
+  }
+
+  // Populate edit modal part select
+  const editPart = document.getElementById('edit-part');
+  if (editPart) {
+    while (editPart.options.length > 1) editPart.remove(1);
+    PARTS_REGISTRY.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.key;
+      opt.textContent = p.label;
+      editPart.appendChild(opt);
+    });
+  }
+
+  updateHeaderStats();
+}
+
+function updateHeaderStats() {
+  document.getElementById('stat-total').textContent = allData.length.toLocaleString();
+  const statsWrap = document.getElementById('header-stats-wrap');
+  statsWrap.innerHTML = '';
+  PARTS_REGISTRY.forEach(p => {
+    statsWrap.innerHTML += `<div class="stat-item">
+      <div class="stat-num">${(p.count || 0).toLocaleString()}</div>
+      <div class="stat-lbl">Part ${p.key}</div>
+    </div>`;
+  });
+}
+
+function showEmptyState(title, subtitle) {
+  const wrap = document.getElementById('table-wrap');
+  wrap.innerHTML = `<div class="empty-state">
+    <div class="empty-icon">⚠️</div>
+    <div class="empty-title">${title}</div>
+    <div class="empty-sub">${subtitle}</div>
+  </div>`;
+  document.getElementById('pagination').innerHTML = '';
+}
+
+function showStatusMsg(msg) {
+  const el = document.getElementById('status-msg');
+  if (!el) return;
+  if (!msg) {
+    el.style.display = 'none';
+    el.textContent = '';
+    return;
+  }
+  el.style.display = 'block';
+  el.textContent = msg;
+}
+
+
 // ── FILTERS ───────────────────────────────────────────────────────────────────
 function applyFilters() {
-  const q       = document.getElementById('q').value.trim().toLowerCase();
-  const part    = document.getElementById('filter-part').value;
-  const serial  = document.getElementById('filter-serial').value.trim();
-  const gender  = document.getElementById('filter-gender').value;
-  const ageRange= document.getElementById('filter-age').value;
+  currentPage = 1;
+  const part = document.getElementById('filter-part').value;
+  updateTabs(part);
+
+  const q        = document.getElementById('q').value.trim().toLowerCase();
+  const serialRaw= document.getElementById('filter-serial').value.trim();
+  const gender   = document.getElementById('filter-gender').value;
+  const ageRange = document.getElementById('filter-age').value;
+  const serial   = serialRaw !== '' ? parseInt(serialRaw) : null;
 
   filtered = allData.filter(r => {
-    if (part   && r.part   !== part)           return false;
-    if (gender && r.gender !== gender)          return false;
-    if (serial !== '' && r.serial !== parseInt(serial)) return false;
-
+    if (part && String(r.part) !== String(part)) return false;
+    if (gender && r.gender !== gender) return false;
+    if (serial !== null && r.serial !== serial) return false;
     if (ageRange) {
       const a = r.age;
       if (ageRange === '18-30' && (a < 18 || a > 30)) return false;
@@ -299,22 +653,22 @@ function applyFilters() {
       if (ageRange === '61-80' && (a < 61 || a > 80)) return false;
       if (ageRange === '81+'   && a < 81)              return false;
     }
-
     if (q) {
       const hay = [r.name, r.id, r.house, r.relation].join(' ').toLowerCase();
-      return q.split(/\s+/).every(w => hay.includes(w));
+      return q.split(/\\s+/).every(w => hay.includes(w));
     }
     return true;
   });
 
-  currentPage = 1;
-  updateTabs(part);
   render();
 }
 
 function resetFilters() {
-  ['q','filter-serial'].forEach(id => document.getElementById(id).value = '');
-  ['filter-part','filter-gender','filter-age'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('q').value            = '';
+  document.getElementById('filter-serial').value = '';
+  document.getElementById('filter-part').value   = '';
+  document.getElementById('filter-gender').value = '';
+  document.getElementById('filter-age').value    = '';
   applyFilters();
 }
 
@@ -324,15 +678,22 @@ function setPartTab(val) {
 }
 
 function updateTabs(part) {
-  document.getElementById('tab-all').className = 'part-tab' + (!part ? ' active-all' : '');
-  document.getElementById('tab-238').className = 'part-tab' + (part==='238' ? ' active-238' : '');
-  document.getElementById('tab-240').className = 'part-tab' + (part==='240' ? ' active-240' : '');
+  document.querySelectorAll('.part-tab').forEach(btn => {
+    btn.className = 'part-tab';
+  });
+  if (!part) {
+    const el = document.getElementById('tab-all');
+    if (el) el.className = 'part-tab active-all';
+  } else {
+    const el = document.getElementById(`tab-${part}`);
+    if (el) el.className = `part-tab active-${part}`;
+  }
 }
 
 function setupListeners() {
   let t;
   const db = (fn, ms) => () => { clearTimeout(t); t = setTimeout(fn, ms); };
-  document.getElementById('q').addEventListener('input', db(applyFilters, 220));
+  document.getElementById('q').addEventListener('input', db(applyFilters, 200));
   document.getElementById('filter-serial').addEventListener('input', db(applyFilters, 300));
   document.getElementById('filter-part').addEventListener('change', applyFilters);
   document.getElementById('filter-gender').addEventListener('change', applyFilters);
@@ -349,6 +710,16 @@ function hl(text, q) {
   return out;
 }
 
+function partPillHtml(part) {
+  if (part === '238') return `<span class="part-pill part-238">${part}</span>`;
+  if (part === '240') return `<span class="part-pill part-240">${part}</span>`;
+  const num = parseInt(part, 10) || 1;
+  const hue = (num * 37) % 360;
+  const bg = `hsl(${hue} 70% 90%)`;
+  const fg = `hsl(${hue} 45% 35%)`;
+  return `<span class="part-pill" style="background:${bg};color:${fg}">${part}</span>`;
+}
+
 function render() {
   const q     = document.getElementById('q').value.trim().toLowerCase();
   const total = filtered.length;
@@ -356,14 +727,12 @@ function render() {
   const start = (currentPage - 1) * PAGE_SIZE;
   const slice = filtered.slice(start, start + PAGE_SIZE);
 
-  // Count
   const countEl = document.getElementById('result-count');
   countEl.innerHTML = total === 0
     ? 'কোনো ফলাফল নেই &nbsp;·&nbsp; <strong>No results found</strong>'
     : `দেখানো <strong>${start+1}–${Math.min(start+PAGE_SIZE,total)}</strong> / মোট <strong>${total.toLocaleString()}</strong> জন`;
 
   const wrap = document.getElementById('table-wrap');
-
   if (total === 0) {
     wrap.innerHTML = `<div class="empty-state">
       <div class="empty-icon">🔍</div>
@@ -374,28 +743,58 @@ function render() {
     return;
   }
 
-  const rows = slice.map((r, i) => `<tr style="animation-delay:${i*10}ms">
+  const rows = slice.map((r, i) => {
+    const safeId = encodeURIComponent(String(r.id));
+    const disabled = isLoggedIn() ? '' : 'disabled';
+    const isEditing = String(editingId) === String(r.id);
+    const log = editLog[String(r.id)];
+    const logText = log ? `${log.by} · ${formatLogTime(log.at)}` : '—';
+    if (isEditing) {
+      return `<tr style="animation-delay:${i*10}ms">
+    <td class="td-serial"><input type="number" id="e-serial-${safeId}" value="${r.serial}" style="width:56px"></td>
+    <td class="td-part"><input type="number" id="e-part-${safeId}" value="${r.part}" style="width:62px"></td>
+    <td class="td-id">${hl(r.id, q)}</td>
+    <td class="td-name"><input type="text" id="e-name-${safeId}" value="${r.name || ''}"></td>
+    <td class="td-relation"><input type="text" id="e-relation-${safeId}" value="${r.relation || ''}"></td>
+    <td class="td-house"><input type="text" id="e-house-${safeId}" value="${r.house || ''}"></td>
+    <td class="td-age"><input type="number" id="e-age-${safeId}" value="${r.age}" style="width:60px"></td>
+    <td class="td-gender">
+      <select id="e-gender-${safeId}">
+        <option value="পুরুষ" ${r.gender==='পুরুষ'?'selected':''}>পুরুষ</option>
+        <option value="মহিলা" ${r.gender==='মহিলা'?'selected':''}>মহিলা</option>
+        <option value="Male" ${r.gender==='Male'?'selected':''}>Male</option>
+        <option value="Female" ${r.gender==='Female'?'selected':''}>Female</option>
+        <option value="M" ${r.gender==='M'?'selected':''}>M</option>
+        <option value="F" ${r.gender==='F'?'selected':''}>F</option>
+      </select>
+    </td>
+    <td class="td-log">${logText}</td>
+    <td>
+      <button class="btn-edit" onclick="saveInlineEdit('${safeId}')">Save</button>
+      <button class="btn-edit" onclick="cancelInlineEdit()">Cancel</button>
+    </td>
+    </tr>`;
+    }
+    return `<tr style="animation-delay:${i*10}ms">
     <td class="td-serial">${r.serial}</td>
-    <td class="td-part"><span class="part-pill part-${r.part}">${r.part}</span></td>
+    <td class="td-part">${partPillHtml(String(r.part))}</td>
     <td class="td-id">${hl(r.id, q)}</td>
     <td class="td-name">${hl(r.name, q)}</td>
     <td class="td-relation">${hl(r.relation, q)}</td>
     <td class="td-house">${hl(r.house, q)}</td>
     <td class="td-age">${r.age}</td>
     <td class="td-gender"><span class="gender-pill ${r.gender==='পুরুষ'?'gender-m':'gender-f'}">${r.gender}</span></td>
-  </tr>`).join('');
+    <td class="td-log">${logText}</td>
+    <td><button class="btn-edit" ${disabled} onclick="startInlineEdit('${safeId}')">Edit</button></td>
+    </tr>`;
+  }).join('');
 
   wrap.innerHTML = `<table>
     <thead><tr>
-      <th class="c">#</th>
-      <th class="c">Part</th>
-      <th>Voter ID</th>
-      <th class="bn">নাম / Name</th>
-      <th class="bn">পিতা / স্বামী</th>
-      <th>House No.</th>
-      <th class="c">Age</th>
-      <th class="bn c">লিঙ্গ</th>
-    </tr></thead>
+      <th class="c">#</th><th class="c">Part</th><th>Voter ID</th>
+      <th class="bn">নাম / Name</th><th class="bn">পিতা / স্বামী</th>
+      <th>House No.</th><th class="c">Age</th><th class="bn c">লিঙ্গ</th><th class="c">Edited By</th><th class="c">Action</th>
+      </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
 
@@ -405,13 +804,11 @@ function render() {
 function renderPagination(pages) {
   const pg = document.getElementById('pagination');
   if (pages <= 1) { pg.innerHTML = ''; return; }
-
   const range = [];
   for (let i = 1; i <= pages; i++) {
-    if (i===1 || i===pages || (i>=currentPage-2 && i<=currentPage+2)) range.push(i);
-    else if (range[range.length-1] !== '…') range.push('…');
+    if (i===1||i===pages||(i>=currentPage-2&&i<=currentPage+2)) range.push(i);
+    else if (range[range.length-1]!=='…') range.push('…');
   }
-
   pg.innerHTML =
     `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>` +
     range.map(p => p==='…'
@@ -426,10 +823,263 @@ function goPage(p) {
   if (p < 1 || p > pages) return;
   currentPage = p;
   render();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── INSERT (modal form) ─────────────────────────────────────────────────────
+function openAddModal() {
+  const modal = document.getElementById('add-modal');
+  if (!modal) return;
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden', 'false');
+  const nameEl = document.getElementById('add-name');
+  if (nameEl) nameEl.focus();
+}
+
+function closeAddModal() {
+  const modal = document.getElementById('add-modal');
+  if (!modal) return;
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden', 'true');
+  clearAddError();
+}
+
+function clearAddError() {
+  const err = document.getElementById('add-error');
+  if (!err) return;
+  err.style.display = 'none';
+  err.textContent = '';
+}
+
+function showAddError(msg) {
+  const err = document.getElementById('add-error');
+  if (!err) return;
+  err.textContent = msg;
+  err.style.display = 'block';
+}
+
+async function handleAddSubmit(e) {
+  e.preventDefault();
+  if (!isSupabaseConfigured()) {
+    showAddError('Supabase is not configured.');
+    return;
+  }
+
+  const submitBtn = document.getElementById('add-submit');
+  if (submitBtn) submitBtn.disabled = true;
+  clearAddError();
+
+  const payload = {
+    name: document.getElementById('add-name').value.trim(),
+    voter_id: document.getElementById('add-voter-id').value.trim(),
+    relation: document.getElementById('add-relation').value.trim(),
+    house: document.getElementById('add-house').value.trim(),
+    serial: parseInt(document.getElementById('add-serial').value, 10),
+    age: parseInt(document.getElementById('add-age').value, 10),
+    gender: document.getElementById('add-gender').value,
+    part: parseInt(document.getElementById('add-part').value, 10)
+  };
+
+  if (!payload.name || !payload.voter_id || !Number.isFinite(payload.part) || !payload.serial || !payload.age || !payload.gender) {
+    showAddError('Please fill all required fields.');
+    if (submitBtn) submitBtn.disabled = false;
+    return;
+  }
+
+  const { error } = await sb.from('voters').insert(payload);
+  if (error) {
+    console.error('Insert failed:', error);
+    showAddError('Insert failed. Please check Supabase policy and required fields.');
+    if (submitBtn) submitBtn.disabled = false;
+    return;
+  }
+
+  if (submitBtn) submitBtn.disabled = false;
+  document.getElementById('add-form').reset();
+  closeAddModal();
+  await fetchAllFromDb();
+  buildUiFromRegistry();
+  applyFilters();
+}
+
+const addFormEl = document.getElementById('add-form');
+if (addFormEl) addFormEl.addEventListener('submit', handleAddSubmit);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeAddModal();
+});
+
+// ── RELOAD + JSON IMPORT ────────────────────────────────────────────────────
+async function reloadData() {
+  await fetchAllFromDb();
+  buildUiFromRegistry();
+  applyFilters();
+}
+
+// ── AUTH (Mobile OTP Login) ────────────────────────────────────────────────
+function initAuth() {
+  const stored = localStorage.getItem('voter_login_mobile');
+  if (stored && ALLOWED_MOBILES.includes(stored)) {
+    setLoginUi(stored);
+  } else {
+    localStorage.removeItem('voter_login_mobile');
+    setLoginUi(null);
+  }
+}
+
+function isLoggedIn() {
+  const stored = localStorage.getItem('voter_login_mobile');
+  return !!stored && ALLOWED_MOBILES.includes(stored);
+}
+
+function setLoginUi(mobile) {
+  const statusEl = document.getElementById('login-status');
+  const logoutBtn = document.getElementById('logout-btn');
+  if (statusEl) statusEl.textContent = mobile ? mobile : 'Guest';
+  if (logoutBtn) logoutBtn.style.display = mobile ? 'inline-block' : 'none';
+}
+
+function login() {
+  const mobile = prompt('Enter mobile number:');
+  if (!mobile) return;
+  const normalized = mobile.replace(/\s+/g, '');
+  if (!ALLOWED_MOBILES.includes(normalized)) {
+    alert('Mobile not authorized.');
+    return;
+  }
+
+  const otp = String(Math.floor(100000 + Math.random() * 900000));
+  const expiresAt = Date.now() + 5 * 60 * 1000;
+  sessionStorage.setItem('voter_login_pending', JSON.stringify({ mobile: normalized, otp, expiresAt }));
+
+  alert(`OTP (demo): ${otp}`);
+  const entered = prompt('Enter OTP:');
+  if (!entered) return;
+
+  const pendingRaw = sessionStorage.getItem('voter_login_pending');
+  if (!pendingRaw) { alert('OTP expired.'); return; }
+  const pending = JSON.parse(pendingRaw);
+  if (Date.now() > pending.expiresAt) { alert('OTP expired.'); return; }
+  if (entered.trim() !== pending.otp) { alert('Invalid OTP.'); return; }
+
+  localStorage.setItem('voter_login_mobile', pending.mobile);
+  sessionStorage.removeItem('voter_login_pending');
+  setLoginUi(pending.mobile);
+  render();
+}
+
+function logout() {
+  localStorage.removeItem('voter_login_mobile');
+  setLoginUi(null);
+  editingId = null;
+  render();
+}
+
+async function importJson() {
+  if (!isSupabaseConfigured()) {
+    alert('Supabase is not configured.');
+    return;
+  }
+  if (!confirm('Import data_238.json and data_240.json into Supabase?')) return;
+
+  setStatus('loading', 'Importing');
+
+  try {
+    const files = ['data_238.json', 'data_240.json'];
+    const all = [];
+    for (const f of files) {
+      const res = await fetch(f);
+      if (!res.ok) throw new Error(`Failed to fetch ${f}`);
+      const rows = await res.json();
+      all.push(...rows);
+    }
+
+    const normalized = all.map(r => ({
+      voter_id: String(r.id),
+      serial: Number(r.serial),
+      name: r.name || '',
+      relation: r.relation || '',
+      house: r.house || '',
+      age: Number(r.age),
+      gender: r.gender || '',
+      part: Number(r.part)
+    }));
+
+    const batchSize = 500;
+    for (let i = 0; i < normalized.length; i += batchSize) {
+      const batch = normalized.slice(i, i + batchSize);
+      const { error } = await sb.from('voters').upsert(batch, { onConflict: 'voter_id' });
+      if (error) throw error;
+    }
+
+    setStatus('ok', 'Imported');
+    await reloadData();
+  } catch (err) {
+    console.error('Import failed:', err);
+    setStatus('error', 'Error');
+    alert('Import failed. Check console and Supabase policy.');
+  }
+}
+
+// ── EDIT (inline action) ────────────────────────────────────────────────────
+function startInlineEdit(encodedId) {
+  if (!isLoggedIn()) {
+    alert('Please login to edit.');
+    return;
+  }
+  editingId = decodeURIComponent(encodedId);
+  render();
+}
+
+function cancelInlineEdit() {
+  editingId = null;
+  render();
+}
+
+async function saveInlineEdit(encodedId) {
+  if (!isLoggedIn()) {
+    alert('Please login to edit.');
+    return;
+  }
+
+  const id = decodeURIComponent(encodedId);
+  const safeId = encodeURIComponent(id);
+  const payload = {
+    name: document.getElementById(`e-name-${safeId}`).value.trim(),
+    relation: document.getElementById(`e-relation-${safeId}`).value.trim(),
+    house: document.getElementById(`e-house-${safeId}`).value.trim(),
+    serial: parseInt(document.getElementById(`e-serial-${safeId}`).value, 10),
+    age: parseInt(document.getElementById(`e-age-${safeId}`).value, 10),
+    gender: document.getElementById(`e-gender-${safeId}`).value,
+    part: parseInt(document.getElementById(`e-part-${safeId}`).value, 10)
+  };
+
+  if (!id || !payload.name || !Number.isFinite(payload.part) || !payload.serial || !payload.age || !payload.gender) {
+    alert('Please fill all required fields.');
+    return;
+  }
+
+  const { error } = await sb.from('voters').update(payload).eq('voter_id', id);
+  if (error) {
+    console.error('Update failed:', error);
+    alert('Update failed. Check Supabase policy.');
+    return;
+  }
+
+  const idx = allData.findIndex(r => String(r.id) === String(id));
+  if (idx !== -1) {
+    allData[idx] = { ...allData[idx], ...payload, part: String(payload.part) };
+    setEditLog(id, localStorage.getItem('voter_login_mobile') || 'Unknown');
+    saveToCache(allData);
+  }
+
+  editingId = null;
+  buildRegistryFromData(allData);
+  buildUiFromRegistry();
+  applyFilters();
 }
 
 init();
+
 </script>
 </body>
 </html>
